@@ -72,7 +72,7 @@ public class MainClass_Caesars_code {
         //Читаем первую главу в строку
         int k = 17;
        String string_first_chapter ="";
-        try(FileReader reader = new FileReader("1 глава.txt")){
+        try(FileReader reader = new FileReader("fortests\\1 глава.txt")){
             char[] buf = new char[256];
             int c;
             while((c = reader.read(buf))>0){//В данном случае считываем последовательно символы из файла в массив из 256 символов, пока не дойдем до конца файла в этом случае метод read возвратит число -1.
@@ -101,7 +101,7 @@ public class MainClass_Caesars_code {
             }
         }
         //записываем зашифрованную главу в другой файл
-        try(FileWriter writer = new FileWriter("Зашифрованная первая глава.txt", false)){
+        try(FileWriter writer = new FileWriter("fortests\\Зашифрованная первая глава.txt", false)){
             String b = new String(result);
             writer.write(result);
             writer.flush();
@@ -117,7 +117,7 @@ public class MainClass_Caesars_code {
     
     //Чтение из файла всей книги Война и мир и частотный анализ букв и пар букв
     private static void frequency_analysis() {
-        try(FileReader reader = new FileReader("Война и мир.txt")){
+        try(FileReader reader = new FileReader("fortests\\Война и мир.txt")){
             char[] buf = new char[256];
             int c;//колличество прочитанных символов
             while((c = reader.read(buf))>0){//В данном случае считываем последовательно символы из файла в массив из 256 символов, пока не дойдем до конца файла в этом случае метод read возвратит число -1.
@@ -173,7 +173,7 @@ public class MainClass_Caesars_code {
         //сделать из массива char строку
         String b = new String(first_chapter_encoded);
         //записать в файл "расшифрованная первая глава"
-        try(FileWriter writer = new FileWriter("Расшифрованная первая глава.txt", false)){//False означает стирать содержимое, если там что-то есть
+        try(FileWriter writer = new FileWriter("fortests\\Расшифрованная первая глава.txt", false)){//False означает стирать содержимое, если там что-то есть
             writer.write(b);
             writer.flush();
         }
@@ -278,12 +278,12 @@ public class MainClass_Caesars_code {
         String t;
         char[] replacement;
         char[] res_char_mass = onlyRussian(first_chapter_encoded);
-        System.out.println(res_char_mass);
+        //System.out.println(res_char_mass);
         String str =  new String(res_char_mass);
         String[] string_mass = str.split("-");
-        for(String s:string_mass){
+        /*for(String s:string_mass){
             System.out.println(s);
-        }
+        }*/
         for(String st:string_mass ){
             if(!st.isEmpty()){
                 char[] ch = st.toCharArray();
@@ -313,7 +313,7 @@ public class MainClass_Caesars_code {
         }
         
         //Записываем в файл "Расшифоровка биграммами.txt"
-        try(FileWriter writer1 = new FileWriter("Расшифоровка биграммами.txt", false)){//False означает стирать содержимое, если там что-то есть
+        try(FileWriter writer1 = new FileWriter("fortests\\Расшифоровка биграммами.txt", false)){//False означает стирать содержимое, если там что-то есть
             writer1.write(str_result);
             writer1.flush();
         }
