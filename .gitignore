@@ -24,3 +24,5 @@ hs_err_pid*
 build/classes/.netbeans_automatic_build
 build/classes/.netbeans_update_resources
 nbproject/private/private.properties
+/build/
+nbproject/private/private.xml
