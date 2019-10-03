@@ -5,6 +5,7 @@
  */
 package generation_and_search_prime_numbers;
 
+import static testing_bits_of_number.Testing_bits_of_number.generation_prime_num;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +21,10 @@ public class Generation_and_search_prime_numbers {
     static int n = 10;
     static int N = 2000;
     static BigInteger p = BigInteger.ZERO;
-    static List<BigInteger> list_prime_num = new ArrayList<>();;
+    static List<BigInteger> list_prime_num = new ArrayList<>();
+    
     public static void main(String[] args) {
-        do{
+        /*do{
             generation_n_bit_random_number();
             System.out.println("\n"+p);
             sieve_of_eratosthenes();
@@ -32,7 +34,9 @@ public class Generation_and_search_prime_numbers {
         for(int i=0;i<1;i++){
             robin_miller_test();
             //System.out.println(b);
-        }
+        }*/
+        long a = generation_prime_num();
+        System.out.println(a);
         
     }
     static public void generation_n_bit_random_number(){
