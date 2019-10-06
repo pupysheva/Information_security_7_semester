@@ -20,15 +20,15 @@ import java.util.Map;
  *
  * @author pupys
  */
-public class MainClass_Caesars_code {
+public class CaesarsCode {
 
     
     static List<String> list_letters = new ArrayList<>(Arrays.asList("А","Б","В","Г","Д","Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я" ));
     static List<Element> list_frequency1 = new ArrayList<>();
     static List<Element> list_frequency_glava1_decod = new ArrayList<>();
     
-    static HashMap<String, Elem_bigram> map_of_pairs_of_letters = new HashMap<>();
-    static HashMap<String, Elem_bigram> map_first_chap = new HashMap<>();
+    static HashMap<String, ElemBigram> map_of_pairs_of_letters = new HashMap<>();
+    static HashMap<String, ElemBigram> map_first_chap = new HashMap<>();
     
     public static void main(String[] args) {
         
@@ -59,8 +59,8 @@ public class MainClass_Caesars_code {
         for(int i=0; i<list_letters.size();i++){
             for(int j=0; j<list_letters.size();j++){
                 String name = list_letters.get(i)+list_letters.get(j);
-                map_of_pairs_of_letters.put(name ,new Elem_bigram(name ,0));
-                map_first_chap.put(name ,new Elem_bigram(name ,0));
+                map_of_pairs_of_letters.put(name ,new ElemBigram(name ,0));
+                map_first_chap.put(name ,new ElemBigram(name ,0));
             }
         }
     }
@@ -226,7 +226,7 @@ public class MainClass_Caesars_code {
     
     
     
-    private static void func(char[] mass,HashMap<String, Elem_bigram> map) {
+    private static void func(char[] mass,HashMap<String, ElemBigram> map) {
         Integer tempInt=0;
         for(int i =0; i<mass.length-1;i++){
             String s = ""+mass[i]+mass[i+1];
@@ -242,17 +242,17 @@ public class MainClass_Caesars_code {
         //смотрим пары букв в зашифрованной 1 главе
         func(first_chapter_encoded,map_first_chap);
         //отсортировать 2 map
-        List<Elem_bigram> elems_toSort_map1 = new ArrayList<Elem_bigram>(map_of_pairs_of_letters.values());
-        Collections.sort(elems_toSort_map1, new Comparator<Elem_bigram>() {
-            public int compare(Elem_bigram o1, Elem_bigram o2) {
+        List<ElemBigram> elems_toSort_map1 = new ArrayList<ElemBigram>(map_of_pairs_of_letters.values());
+        Collections.sort(elems_toSort_map1, new Comparator<ElemBigram>() {
+            public int compare(ElemBigram o1, ElemBigram o2) {
                 if (o1.getCount() == o2.getCount()) return 0;
                 else if (o1.getCount()< o2.getCount()) return 1;
                 else return -1;
             }
         });
-        List<Elem_bigram> elems_toSort_map2 = new ArrayList<Elem_bigram>(map_first_chap.values());
-        Collections.sort(elems_toSort_map2, new Comparator<Elem_bigram>() {
-            public int compare(Elem_bigram o1, Elem_bigram o2) {
+        List<ElemBigram> elems_toSort_map2 = new ArrayList<ElemBigram>(map_first_chap.values());
+        Collections.sort(elems_toSort_map2, new Comparator<ElemBigram>() {
+            public int compare(ElemBigram o1, ElemBigram o2) {
                 if (o1.getCount() == o2.getCount()) return 0;
                 else if (o1.getCount()< o2.getCount()) return 1;
                 else return -1;

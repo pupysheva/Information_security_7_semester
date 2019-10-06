@@ -9,11 +9,11 @@ package inf_secur_caesar_code;
  *
  * @author pupys
  */
-public class Elem_bigram implements Comparable<Elem_bigram> {
+public class ElemBigram implements Comparable<ElemBigram> {
     String name;
     Integer count;
 
-    public Elem_bigram(String name, Integer count) {
+    public ElemBigram(String name, Integer count) {
         this.name = name;
         this.count = count;
     }
@@ -37,7 +37,7 @@ public class Elem_bigram implements Comparable<Elem_bigram> {
     }
 
     @Override
-    public int compareTo(Elem_bigram el) {
+    public int compareTo(ElemBigram el) {
         return (int)(this.count - el.getCount());
     }
 }

@@ -16,26 +16,31 @@ import java.util.Random;
  *
  * @author pupys
  */
-public class Generation_and_search_prime_numbers {
+public class PrimeNumbers {
     //Число разрядов числа
     static BigInteger num_p = BigInteger.ZERO;
-    static int n = 50;
+    static int n = 100;
     static int N = 2000;
     static List<BigInteger> list_prime_num = new ArrayList<>();
     static int K = 5;
     
+    /*static // Статический конструктор.
+    {   
+        sieve_of_eratosthenes();
+    }*/
+    
     public static void main(String[] args) {
-        /*long a = generation_prime_num(50);
+        /*long a = generation_prime_num(63);
         System.out.println(a);*/
         generation_Big_prime_num();
         
     }
     public static void generation_Big_prime_num() {
         boolean c = false;
+        sieve_of_eratosthenes();
         while(!c){
             do{
                 generation_n_bit_random_number();
-                sieve_of_eratosthenes();
             }while(isDivided_into_simple());
 
             //тест Робина-Миллера
@@ -52,9 +57,10 @@ public class Generation_and_search_prime_numbers {
         s+=1;
         num_p = new BigInteger(s);
         System.out.println("p = "+ num_p);*/
-        num_p = BigInteger.ZERO;
-        for(int j = 0; j < n; j++)
+        num_p = BigInteger.ONE;
+        for(int j = 0; j < n - 1; j++)
             num_p = (num_p.multiply(BigInteger.valueOf(2))).add(BigInteger.valueOf((int) (Math.random()*2)));
+        num_p = num_p.or(BigInteger.valueOf(1));
         System.out.println("---------------------------------------------------");
         System.out.println(num_p);
         //num_p |=(1L<<(n-1)) +1L;
@@ -76,9 +82,7 @@ public class Generation_and_search_prime_numbers {
         for(int i=1;i<N;i++){
             if(isPrime[i]){
                 list_prime_num.add( BigInteger.valueOf(i));
-                //System.out.println(i);
             }
-           
         }
         for(BigInteger j : list_prime_num){
             //System.out.println(j);
@@ -105,24 +109,24 @@ public class Generation_and_search_prime_numbers {
         BigInteger temp_num = num_p.subtract(BigInteger.ONE);
         while(temp_num.compareTo(BigInteger.ZERO) == 1) { //если temp_num>0
             if(temp_num.mod(BIGINTEGER_TWO).compareTo(BigInteger.ZERO)==0){
-                b.add(BigInteger.ONE);
+                b = b.add(BigInteger.ONE);
                 temp_num = temp_num.divide(BIGINTEGER_TWO);
             }
             else{
                 break;
             }
         }
-        
         System.out.println("b = "+b);
+        
         //Вычислить m = (p-1)/(2^b) (разделится без остатка)
         BigInteger m = (num_p.subtract(BigInteger.ONE)).divide(BIGINTEGER_TWO.pow(b.intValue()));
         System.out.println("m = "+m);
         
+        //Тест Рабина-Миллера повторяется 5 раз
         for(int i = 0;i<K;i++){
             //Выбрать случайное а<num_p. а должно быть: 1 < a < n
-            BigInteger a = nextRandomBigInteger();;
+            BigInteger a = nextRandomBigInteger();
             System.out.println("a = "+a);
-            
             
             //Установить j=0
             int j =0;
@@ -154,11 +158,11 @@ public class Generation_and_search_prime_numbers {
         BigInteger temp_n = new BigInteger(num_p+"");
         Random rand = new Random();
         BigInteger result = new BigInteger(temp_n.bitLength(), rand);
-        while( result.compareTo(temp_n) >= 0 ) {//пока result>n
-            System.out.println("result = "+result);
+        while( result.compareTo(temp_n) >= 0 && !(result.compareTo(BigInteger.ONE)==1)) {//пока result>n
+            //System.out.println("result = "+result);
             result = new BigInteger(temp_n.bitLength(), rand);
         }
-        System.out.println("result = "+result);
+        //System.out.println("result = "+result);
         return result;
     }
 }

@@ -68,8 +68,8 @@ public class Temp_using_Map {
     static List<Element> list_frequency1 = new ArrayList<>();
     static List<Element> list_frequency_glava1_decod = new ArrayList<>();
     
-    static HashMap<String, Elem_bigram> map_of_pairs_of_letters = new LinkedHashMap<>();
-    static HashMap<String, Elem_bigram> map_first_chap = new LinkedHashMap<>();
+    static HashMap<String, ElemBigram> map_of_pairs_of_letters = new LinkedHashMap<>();
+    static HashMap<String, ElemBigram> map_first_chap = new LinkedHashMap<>();
     
     public static void maining(String[] args) {
         
@@ -96,8 +96,8 @@ public class Temp_using_Map {
         for(int i=0; i<list_letters.size();i++){
             for(int j=0; j<list_letters.size();j++){
                 String name = list_letters.get(i)+list_letters.get(j);
-                map_of_pairs_of_letters.put(name ,new Elem_bigram(name ,0));
-                map_first_chap.put(name ,new Elem_bigram(name ,0));
+                map_of_pairs_of_letters.put(name ,new ElemBigram(name ,0));
+                map_first_chap.put(name ,new ElemBigram(name ,0));
             }
         }
     }
@@ -240,8 +240,8 @@ public class Temp_using_Map {
                 System.out.println(el.getName()+"  "+el.getValue());
             }
     }
-    /*private static void printer_map(HashMap<String, Elem_bigram> map){
-        for (Map.Entry<String, Elem_bigram> entry : map.entrySet()) {
+    /*private static void printer_map(HashMap<String, ElemBigram> map){
+        for (Map.Entry<String, ElemBigram> entry : map.entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue().getCount()+ "  "+entry.getValue().getRelation());
         }
     }*/
@@ -264,7 +264,7 @@ public class Temp_using_Map {
         }
         return ind;
     }
-    private static void func(char[] mass,HashMap<String, Elem_bigram> map) {
+    private static void func(char[] mass,HashMap<String, ElemBigram> map) {
         Integer tempInt=0;
         for(int i =0; i<mass.length-1;i++){
             String s = ""+mass[i]+mass[i+1];
@@ -282,15 +282,15 @@ public class Temp_using_Map {
         //смотрим пары букв в зашифрованной 1 главе
         func(first_chapter_encoded,map_first_chap);
         //отсортировать 2 map
-        List<Elem_bigram> elems_toSort_map1 = new ArrayList<Elem_bigram>(map_of_pairs_of_letters.values());
-        Collections.sort(elems_toSort_map1, new Comparator<Elem_bigram>() {
-            public int compare(Elem_bigram o1, Elem_bigram o2) {
+        List<ElemBigram> elems_toSort_map1 = new ArrayList<ElemBigram>(map_of_pairs_of_letters.values());
+        Collections.sort(elems_toSort_map1, new Comparator<ElemBigram>() {
+            public int compare(ElemBigram o1, ElemBigram o2) {
                 return o1.getCount() - o2.getCount();
             }
         });
-        List<Elem_bigram> elems_toSort_map2 = new ArrayList<Elem_bigram>(map_first_chap.values());
-        Collections.sort(elems_toSort_map2, new Comparator<Elem_bigram>() {
-            public int compare(Elem_bigram o1, Elem_bigram o2) {
+        List<ElemBigram> elems_toSort_map2 = new ArrayList<ElemBigram>(map_first_chap.values());
+        Collections.sort(elems_toSort_map2, new Comparator<ElemBigram>() {
+            public int compare(ElemBigram o1, ElemBigram o2) {
                 return o1.getCount() - o2.getCount();
             }
         });
@@ -298,7 +298,7 @@ public class Temp_using_Map {
         for(int o = 0; o<elems_toSort_map1.size();o++){
             //elems_toSort_map1.get(o).setRelation(elems_toSort_map2.get(o).getName());
         }
-        for(Elem_bigram el :elems_toSort_map1){
+        for(ElemBigram el :elems_toSort_map1){
             //map_of_pairs_of_letters.get(el.getName()).setRelation(el.getRelation());
         }
         //printer_map(map_of_pairs_of_letters);
