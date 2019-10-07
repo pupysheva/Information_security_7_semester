@@ -5,7 +5,7 @@
  */
 package generation_and_search_prime_numbers;
 
-import static testing_bits_of_number.Testing_bits_of_number.generation_prime_num;//Имя пакет, класс, имя метода
+import testing_bits_of_number.LongPrimeNumber;//Имя пакет, класс, имя метода
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,25 +30,25 @@ public class PrimeNumbers {
     }*/
     
     public static void main(String[] args) {
-        /*long a = generation_prime_num(63);
+        /*long a = LongPrimeNumber.generationLongPrimeNum(63);
         System.out.println(a);*/
-        generation_Big_prime_num();
+        generationBigPrimeNum();
         
     }
-    public static void generation_Big_prime_num() {
+    public static void generationBigPrimeNum() {
         boolean c = false;
-        sieve_of_eratosthenes();
+        sieveOfEratosthenes();
         while(!c){
             do{
-                generation_n_bit_random_number();
-            }while(isDivided_into_simple());
+                generationNBitRandomNumber();
+            }while(isDividedIntoSimple());
 
             //тест Робина-Миллера
-            c = rabin_miller_test();
+            c = rabinMillerTest();
         }
         System.out.println(num_p);
     }
-    static public void generation_n_bit_random_number(){
+    static public void generationNBitRandomNumber(){
         /*String s = "1";
         for(int i=1;i<n-1;i++){
             int temp_didit = (int)(Math.random()*10);
@@ -71,7 +71,7 @@ public class PrimeNumbers {
        
     }
     
-    static public void sieve_of_eratosthenes(){
+    static public void sieveOfEratosthenes(){
         boolean[] isPrime  = new boolean[N];
         Arrays.fill(isPrime,true);
         isPrime[1] = false;
@@ -89,7 +89,7 @@ public class PrimeNumbers {
         }
     }
 
-    private static boolean isDivided_into_simple() {
+    private static boolean isDividedIntoSimple() {
         boolean flag_return = false;
         for(BigInteger j : list_prime_num){
             //если p делится на число (если остаток ==0)
@@ -102,7 +102,7 @@ public class PrimeNumbers {
         return flag_return;
     }
 
-    private static boolean rabin_miller_test() {
+    private static boolean rabinMillerTest() {
         //сколько раз число делится на 2
         BigInteger b = BigInteger.ZERO;
         BigInteger BIGINTEGER_TWO = BigInteger.valueOf(2);
