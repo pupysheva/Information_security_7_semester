@@ -20,8 +20,8 @@ import testing_bits_of_number.BigIntPrimeNumber;
 public class MainClass {
     
     public static void main(String[] args){
-        Person alice = createKeys();
-        Person bob = createKeys();
+        Person alice = new Person();
+        Person bob = new Person();
         
         alice.setOtherPersonPublicKey(bob.getPk());
         bob.setOtherPersonPublicKey(alice.getPk());
@@ -35,7 +35,7 @@ public class MainClass {
         String strDecoded = dencodMEssage(encodedMEssage,alice.getSk());
     }
     
-    public static Person createKeys() {
+    /*public static Person createKeys() {
         BigInteger p, q, n, f, e, d;
         
         p = BigIntPrimeNumber.generationBigPrimeNum(30);
@@ -63,7 +63,7 @@ public class MainClass {
                return e;
         }
         return BigInteger.valueOf(-1);
-    }
+    }*/
     
     //считать текст из файла
     private static  ArrayList<BigInteger> readFileAndEncodMEssage(PublicKey keyForCipher) {
@@ -73,7 +73,10 @@ public class MainClass {
         try(FileReader reader = new FileReader("fortests\\for_tests_rsa.txt")){
             char[] buf = new char[256];
             int c;
+            //считываем в промежуточный буфер из массива символов
             while((c = reader.read(buf))>0){//В данном случае считываем последовательно символы из файла в массив из 256 символов, пока не дойдем до конца файла в этом случае метод read возвратит число -1.
+                /*Поскольку считанная порция файла может быть меньше 256 символов (например, в файле всего 73 символа), и если количество считанных данных меньше размера буфера (256), то выполняем копирование массива с помощью метода Arrays.copy.
+                То есть фактически обрезаем массив buf, оставляя в нем только те символы, которые считаны из файла.*/
                 if(c < 256){
                     buf = Arrays.copyOf(buf, c);
                 }
@@ -103,6 +106,8 @@ public class MainClass {
     
     //считать текст из файла
     private static String dencodMEssage(ArrayList<BigInteger> encodMEssage,SecretKey sk) {
+        System.out.println(
+        );
         for(int i=0;i<encodMEssage.size();i++){
             BigInteger m = encodMEssage.get(i).modPow(sk.getD(), sk.getN());
             
